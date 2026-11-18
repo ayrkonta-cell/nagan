@@ -151,7 +151,6 @@ class MainViewModel(
                 }
             }
         }
-        performSearch("Lo-Fi Chill")
     }
 
     fun onQueryChanged(value: String) {

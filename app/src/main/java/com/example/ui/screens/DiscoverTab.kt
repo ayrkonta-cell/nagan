@@ -68,16 +68,6 @@ import com.example.ui.theme.StudioCardElevated
 import com.example.ui.theme.StudioObsidian
 import com.example.ui.theme.VinylCoral
 
-private val QuickDiscoverQueries = listOf(
-    "עומר אדם",
-    "עידן רייכל",
-    "Lo-Fi Chill",
-    "Acoustic Guitar",
-    "Jazz Piano",
-    "Electronic Beats",
-    "Ambient Space"
-)
-
 @Composable
 fun DiscoverTab(
     query: String,
@@ -119,44 +109,6 @@ fun DiscoverTab(
                     onSearchSubmit(null)
                 }
             )
-        }
-
-        item {
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(QuickDiscoverQueries) { suggestion ->
-                    Surface(
-                        shape = CircleShape,
-                        color = StudioCardElevated,
-                        border = BorderStroke(0.5.dp, Color.White.copy(alpha = 0.08f)),
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .clickable {
-                                keyboardController?.hide()
-                                onSearchSubmit(suggestion)
-                            }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.AutoAwesome,
-                                contentDescription = null,
-                                tint = HarmonicTeal,
-                                modifier = Modifier.size(14.dp)
-                            )
-                            Text(
-                                text = suggestion,
-                                style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                    }
-                }
-            }
         }
 
         item {

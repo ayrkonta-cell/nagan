@@ -63,4 +63,40 @@ class ExampleRobolectricTest {
     assertEquals("https://example.com/muxed.mp4", streams[2].url)
     assertEquals("TestUA", streams[0].userAgent)
   }
+
+  @Test
+  fun `soundcloud client parses full tracks and skips short snips`() {
+    val sampleJson = """
+      {
+        "collection": [
+          {
+            "id": 111,
+            "title": "Short Preview",
+            "duration": 30000,
+            "policy": "SNIP",
+            "streamable": true,
+            "user": {"username": "Artist"},
+            "media": {"transcodings": [{"url": "https://api-v2.soundcloud.com/t1", "format": {"protocol": "hls", "mime_type": "audio/mp4"}}]}
+          },
+          {
+            "id": 222,
+            "title": "Full Hebrew Song",
+            "duration": 212880,
+            "policy": "MONETIZE",
+            "streamable": true,
+            "track_authorization": "auth123",
+            "user": {"username": "עומר אדם"},
+            "media": {"transcodings": [{"url": "https://api-v2.soundcloud.com/t2", "format": {"protocol": "hls", "mime_type": "audio/mp4"}}]}
+          }
+        ]
+      }
+    """.trimIndent()
+
+    val tracks = com.example.data.remote.SoundCloudClient.parseTracksResponse(sampleJson)
+    assertEquals(1, tracks.size)
+    assertEquals("sc_222", tracks[0].trackKey)
+    assertEquals("Full Hebrew Song", tracks[0].title)
+    assertEquals(212L, tracks[0].durationSeconds)
+    assertEquals(true, tracks[0].fullTrack)
+  }
 }

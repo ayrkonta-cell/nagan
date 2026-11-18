@@ -24,7 +24,7 @@
     <string name="empty_playlist_subtitle">חפש שירים בלשונית החיפוש והוסף אותם לכאן בלחיצה אחת.</string>
     <string name="go_to_search">חפש שירים עכשיו</string>
     <string name="empty_search_title">גלה מוזיקה מכל העולם</string>
-    <string name="empty_search_subtitle">הקלד שם של שיר או אמן, או בחר באחת מהצעות החיפוש למעלה כדי לסרוק את כל המקורות במקביל.</string>
+    <string name="empty_search_subtitle">הקלד שם של שיר, אמן או סגנון בשורת החיפוש למעלה כדי לסרוק את כל המקורות במקביל.</string>
     <string name="no_results_title">לא נמצאו שירים</string>
     <string name="no_results_subtitle">נסה מילות חיפוש אחרות או שנה את סינון המקורות.</string>
     <string name="confirm_delete_title">מחיקת רשימת השמעה</string>
