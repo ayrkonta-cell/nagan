@@ -1,0 +1,135 @@
+{
+  "entities": {
+    "Playlist": {
+      "title": "Playlist",
+      "description": "A user-owned music playlist containing saved tracks from multiple streaming sources.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Authenticated owner UID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the playlist (1-60 chars)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional playlist subtitle or description (0-200 chars)"
+        },
+        "trackCount": {
+          "type": "integer",
+          "description": "Number of tracks stored in the playlist"
+        },
+        "coverUrl": {
+          "type": "string",
+          "description": "Optional artwork URL taken from the latest added track"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when playlist was created (FieldValue.serverTimestamp())"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when playlist was last modified (FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "name",
+        "description",
+        "trackCount",
+        "coverUrl",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PlaylistTrack": {
+      "title": "PlaylistTrack",
+      "description": "A music track saved inside a user playlist from Audius, iTunes, Deezer, or Internet Archive.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Authenticated owner UID"
+        },
+        "playlistId": {
+          "type": "string",
+          "description": "Parent playlist document ID"
+        },
+        "trackKey": {
+          "type": "string",
+          "description": "Unique source-prefixed track identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Track title"
+        },
+        "artist": {
+          "type": "string",
+          "description": "Artist or creator name"
+        },
+        "album": {
+          "type": "string",
+          "description": "Album or collection name"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["AUDIUS", "ITUNES", "DEEZER", "ARCHIVE"],
+          "description": "Origin music source"
+        },
+        "streamUrl": {
+          "type": "string",
+          "description": "Direct audio stream URL"
+        },
+        "artworkUrl": {
+          "type": "string",
+          "description": "Cover artwork URL"
+        },
+        "durationSeconds": {
+          "type": "integer",
+          "description": "Duration of playable audio in seconds"
+        },
+        "fullTrack": {
+          "type": "boolean",
+          "description": "True if full song stream, false if preview clip"
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when track was added (FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "playlistId",
+        "trackKey",
+        "title",
+        "artist",
+        "album",
+        "source",
+        "streamUrl",
+        "artworkUrl",
+        "durationSeconds",
+        "fullTrack",
+        "addedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/playlists/{playlistId}": {
+      "schema": {
+        "$ref": "#/entities/Playlist"
+      },
+      "description": "User-scoped playlists"
+    },
+    "/users/{userId}/playlists/{playlistId}/tracks/{trackId}": {
+      "schema": {
+        "$ref": "#/entities/PlaylistTrack"
+      },
+      "description": "Tracks saved within a user playlist"
+    }
+  }
+}

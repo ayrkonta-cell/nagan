@@ -1,0 +1,6 @@
+{
+  "name": "צלילים",
+  "description": "אפליקציית מוזיקה לחיפוש אוטומטי בכל מקורות השירים, האזנה וניהול רשימת השמעה.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
